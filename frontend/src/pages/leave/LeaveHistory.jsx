@@ -1,0 +1,106 @@
+import React, { useEffect, useState } from "react";
+import Sidebar from "../../components/sidebar/sidebar";
+import Navbar from "../../components/navbar/Navbar";
+import Loader from "../../components/Loader";
+import { getMyLeaves } from "../../services/leaveService";
+
+import "./LeaveHistory.css";
+import "../dashboard/dashboard.css";
+
+function LeaveHistory() {
+  const [leaves, setLeaves] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchLeaves();
+  }, []);
+
+  const fetchLeaves = async () => {
+    try {
+      setLoading(true);
+      const res = await getMyLeaves();
+
+      setLeaves(res.data.leaves || []);
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="dashboard-container">
+      <Sidebar />
+
+      <div className="content">
+        <Navbar />
+
+        <div className="leave-history-container">
+          <h1>My Leaves</h1>
+
+          {loading ? (
+            <Loader />
+          ) : leaves.length === 0 ? (
+            <p>No leave requests found.</p>
+          ) : (
+            <div className="table-responsive">
+              <table className="leave-table">
+                <thead>
+                  <tr>
+                    <th>Reason</th>
+                    <th>From Date</th>
+                    <th>To Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {leaves.map((item) => (
+                    <tr key={item._id}>
+                      <td>{item.reason}</td>
+
+                      <td>
+                        {new Date(
+                          item.fromDate
+                        ).toLocaleDateString(
+                          "en-IN",
+                          {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                          }
+                        )}
+                      </td>
+
+                      <td>
+                        {new Date(
+                          item.toDate
+                        ).toLocaleDateString(
+                          "en-IN",
+                          {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                          }
+                        )}
+                      </td>
+
+                      <td>
+                        <span
+                          className={`status ${item.status.toLowerCase()}`}
+                        >
+                          {item.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default LeaveHistory;

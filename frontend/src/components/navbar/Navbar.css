@@ -1,0 +1,378 @@
+.navbar {
+  height: 70px;
+  background: var(--nav-bg);
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--nav-shadow);
+  border-radius: 20px; /* Slightly more rounded */
+  margin-bottom: 30px;
+  border: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 15px; /* Floating effect */
+  z-index: 999;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-divider {
+  width: 1px;
+  height: 30px;
+  background: var(--border-color);
+  margin: 0 5px;
+}
+
+.back-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.hamburger-btn {
+  display: none;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.2s;
+  flex-shrink: 0;
+}
+
+.hamburger-btn:hover {
+  background: var(--border-color);
+  color: #2563eb;
+}
+
+.back-btn:hover {
+  background: var(--border-color);
+  transform: translateX(-3px);
+}
+
+.current-page-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.navbar-brand-logo {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar-brand-text {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+}
+
+.navbar-logo {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-icon-container {
+  position: relative;
+}
+
+.theme-toggle, .nav-icon {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover, .nav-icon:hover {
+  background: var(--border-color);
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #ef4444;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid var(--nav-bg);
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 340px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  z-index: 1000;
+  overflow: hidden;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.noti-header {
+  padding: 15px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-secondary);
+}
+
+.noti-tabs {
+  display: flex;
+  gap: 15px;
+}
+
+.noti-tabs span {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 5px 0;
+  position: relative;
+}
+
+.noti-tabs span.active {
+  color: #2563eb;
+}
+
+.noti-tabs span.active::after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #2563eb;
+  border-radius: 10px;
+}
+
+.mark-all-btn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.noti-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.noti-item {
+  padding: 15px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.noti-item:hover {
+  background: var(--border-color);
+}
+
+.noti-item.unread {
+  background: rgba(37, 99, 235, 0.05);
+}
+
+.noti-item.read {
+  opacity: 0.7;
+}
+
+.noti-content p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.noti-content span {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 5px;
+  display: block;
+}
+
+.unread-dot {
+  width: 8px;
+  height: 8px;
+  background: #2563eb;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+.no-noti {
+  padding: 30px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 20px;
+  border-left: 1px solid var(--border-color);
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.user-role {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+.user-avatar {
+  font-size: 32px;
+  color: var(--text-secondary);
+}
+
+.user-avatar-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #2563eb;
+}
+
+@media (max-width: 992px) {
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .navbar {
+    padding: 0 12px;
+    height: 60px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .navbar-left {
+    gap: 8px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .navbar-right {
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .user-details {
+    display: none;
+  }
+
+  .user-profile {
+    padding-left: 5px;
+    border-left: none;
+  }
+
+  .nav-divider {
+    display: none;
+  }
+
+  .current-page-title {
+    font-size: 14px;
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .navbar-logo {
+    height: 36px;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar-brand-text {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .current-page-title {
+    max-width: 100px;
+    font-size: 13px;
+  }
+
+  .notification-dropdown {
+    width: 290px;
+    right: -40px;
+  }
+}
